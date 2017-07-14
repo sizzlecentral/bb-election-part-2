@@ -11,6 +11,16 @@ document.addEventListener("DOMContentLoaded", function() {
       var item = document.createElement('li');
       item.innerHTML = 'Name: ' + responseData.candidates[i].name + ' Votes: ' + responseData.candidates[i].votes;
       var form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'https://bb-election-api.herokuapp.com/vote'
+      var inputHidden = document.createElement('input');
+      inputHidden.type = 'hidden';
+      inputHidden.name = 'id';
+      inputHidden.value = responseData.candidates[i].id;
+      var inputSubmit = document.createElement('input');
+      inputSubmit.type = 'submit';
+      form.appendChild(inputSubmit);
+      form.appendChild(inputHidden);
       item.appendChild(form);
       candidateList.appendChild(item);
     }
